@@ -18,15 +18,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Install Deps
-      run: apt install -y \
-        gcc-c++ \
-        arm-none-eabi-gcc-cs \
-        arm-none-eabi-gcc-cs-c++ \
-        arm-none-eabi-binutils-cs \
-        arm-none-eabi-newlib \
-        libbsd-devel \
-        cmake
+    - name: Install Arm GNU Toolchain (arm-none-eabi-gcc)
+      uses: carlosperate/arm-none-eabi-gcc-action@v1
+      with:
+        release: 'latest' # <-- The compiler release to use
     
     - name: Build
       run: |
