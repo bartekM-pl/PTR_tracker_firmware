@@ -18,9 +18,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Install arm-none-eabi-gcc
-      uses: carlosperate/arm-none-eabi-gcc-action@v1
-    - run: arm-none-eabi-gcc --version
+    - name: Install Arm Toolchain
+      id: arm
+      uses: turtlesec-no/get-arm-toolchain@main
+
+    - name: Arm Toolchain version
+      run: echo "${{ steps.arm.outputs.version }}"
     
     - name: Build
       run: |
