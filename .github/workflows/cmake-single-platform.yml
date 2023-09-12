@@ -18,10 +18,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Install Arm GNU Toolchain (arm-none-eabi-gcc)
+    - name: Install arm-none-eabi-gcc
       uses: carlosperate/arm-none-eabi-gcc-action@v1
-      with:
-        release: 'latest' # <-- The compiler release to use
+    - run: arm-none-eabi-gcc --version
     
     - name: Build
       run: |
