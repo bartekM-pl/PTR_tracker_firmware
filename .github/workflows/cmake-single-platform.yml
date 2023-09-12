@@ -19,7 +19,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Install Deps
-      run: dnf install -y \
+      run: apt install -y \
         gcc-c++ \
         arm-none-eabi-gcc-cs \
         arm-none-eabi-gcc-cs-c++ \
