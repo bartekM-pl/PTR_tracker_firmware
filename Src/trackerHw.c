@@ -1,10 +1,12 @@
 #include "trackerHw.h"
 
 volatile uint32_t tick = 0;
+volatile uint32_t time_ms = 0;
 
 void SysTick_Handler(void)
 {
     tick++ ;
+	time_ms++ ;
 }
 
 void HW_DelayMs(uint32_t _ms)
@@ -20,6 +22,9 @@ void HW_DelayMs(uint32_t _ms)
     while( tick - start < _ms ) ;
 }
 
+uint32_t HW_getTimeMs(){
+	return time_ms;
+}
 
 void HW_trackerHwInit(void) {
 	RCC->CR				= (RCC->CR & ~(1<<8)) | (1<<8); //Enable HSI 16MHz internal oscillator

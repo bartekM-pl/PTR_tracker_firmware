@@ -9,6 +9,7 @@
 
 void SysTick_Handler(void);
 void HW_DelayMs(uint32_t _ms);
+uint32_t HW_getTimeMs();
 void HW_trackerHwInit(void);
 void HW_writeLED(bool _value);
 void HW_write_LORACS(bool _value);
