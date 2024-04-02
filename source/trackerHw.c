@@ -70,9 +70,7 @@ void HW_SPI_ReadBuffer(uint8_t *data, uint32_t size) {
 }
 
 uint32_t HW_readADC(uint8_t _ch) {
-	ADC16_GetChannelConversionValue(ADC0, _ch);
-
-    return 0;
+    return ADC16_GetChannelConversionValue(ADC0, _ch);
 }
 
 uint8_t HW_getVbat(){
@@ -120,16 +118,16 @@ void SysTick_Handler() {
 	SysTick_tickHandler();
 }
 
-void LPUART0_IRQHandler(void) {
+void LPUART1_IRQHandler(void) {
 	uint32_t intStatus;
 	/* Reading all interrupt flags of status registers */
 	intStatus = LPUART_GetStatusFlags(LPUART1_PERIPHERAL);
 
 	if(intStatus & kLPUART_RxDataRegFullFlag){
-		GPS_parse(LPUART0->DATA);
+		GPS_parse(LPUART1->DATA);
 		LPUART_ClearStatusFlags(LPUART1_PERIPHERAL, kLPUART_RxDataRegFullFlag);
 	} else {
-		(void)(LPUART0->DATA);
+		(void)(LPUART1->DATA);
 		LPUART_ClearStatusFlags(LPUART1_PERIPHERAL, 0xFFFFFFFF);
 	}
 }

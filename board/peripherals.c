@@ -69,7 +69,6 @@ instance:
   - nvic:
     - interrupt_table:
       - 0: []
-      - 1: []
     - interrupts: []
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 /* clang-format on */
@@ -98,7 +97,7 @@ instance:
       - clockSource: 'kADC16_ClockSourceAsynchronousClock'
       - enableAsynchronousClock: 'true'
       - clockDivider: 'kADC16_ClockDivider8'
-      - resolution: 'kADC16_ResolutionSE12Bit'
+      - resolution: 'kADC16_ResolutionSE16Bit'
       - longSampleMode: 'kADC16_LongSampleCycle24'
       - enableHighSpeed: 'false'
       - enableLowPower: 'false'
@@ -121,14 +120,14 @@ instance:
       - 0:
         - channelName: ''
         - enableDifferentialConversion: 'false'
-        - channelNumber: 'SE.23'
+        - channelNumber: 'SE.15'
         - enableInterruptOnConversionCompleted: 'false'
         - channelGroup: '0'
         - initializeChannel: 'true'
       - 1:
         - channelName: ''
         - enableDifferentialConversion: 'false'
-        - channelNumber: 'SE.15'
+        - channelNumber: 'SE.23'
         - enableInterruptOnConversionCompleted: 'false'
         - channelGroup: '1'
         - initializeChannel: 'true'
@@ -136,12 +135,12 @@ instance:
 /* clang-format on */
 adc16_channel_config_t ADC0_channelsConfig[2] = {
   {
-    .channelNumber = 23U,
+    .channelNumber = 15U,
     .enableDifferentialConversion = false,
     .enableInterruptOnConversionCompleted = false,
   },
   {
-    .channelNumber = 15U,
+    .channelNumber = 23U,
     .enableDifferentialConversion = false,
     .enableInterruptOnConversionCompleted = false,
   }
@@ -151,7 +150,7 @@ const adc16_config_t ADC0_config = {
   .clockSource = kADC16_ClockSourceAsynchronousClock,
   .enableAsynchronousClock = true,
   .clockDivider = kADC16_ClockDivider8,
-  .resolution = kADC16_ResolutionSE12Bit,
+  .resolution = kADC16_ResolutionSE16Bit,
   .longSampleMode = kADC16_LongSampleCycle24,
   .enableHighSpeed = false,
   .enableLowPower = false,
@@ -243,22 +242,12 @@ static void LPUART1_init(void) {
 instance:
 - name: 'SPI0'
 - type: 'spi'
-- mode: 'SPI_Transfer'
+- mode: 'SPI_Polling'
 - custom_name_enabled: 'false'
 - type_id: 'spi_672b694426b0a10a1d774659ee8f8435'
 - functional_group: 'BOARD_InitPeripherals'
 - peripheral: 'SPI0'
 - config_sets:
-  - transferCfg:
-    - transfer:
-      - init_transfer: 'true'
-      - transfer_cfg:
-        - txDataBufferEnable: 'true'
-        - rxDataBufferEnable: 'true'
-        - dataSize: '260'
-      - init_callback: 'false'
-      - callback_fcn: ''
-      - user_data: ''
   - fsl_spi:
     - spi_mode: 'kSPI_Master'
     - clockSource: 'BusInterfaceClock'
@@ -270,13 +259,9 @@ instance:
       - phase: 'kSPI_ClockPhaseFirstEdge'
       - direction: 'kSPI_MsbFirst'
       - dataMode: 'kSPI_8BitMode'
-      - outputMode: 'kSPI_SlaveSelectAutomaticOutput'
+      - outputMode: 'kSPI_SlaveSelectAsGpio'
       - pinMode: 'kSPI_PinModeNormal'
-      - baudRate_Bps: '1000000'
-    - interrupt_rx_tx:
-      - IRQn: 'SPI0_IRQn'
-      - enable_priority: 'false'
-      - priority: '0'
+      - baudRate_Bps: '500000'
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 /* clang-format on */
 const spi_master_config_t SPI0_config = {
@@ -286,18 +271,14 @@ const spi_master_config_t SPI0_config = {
   .phase = kSPI_ClockPhaseFirstEdge,
   .direction = kSPI_MsbFirst,
   .dataMode = kSPI_8BitMode,
-  .outputMode = kSPI_SlaveSelectAutomaticOutput,
+  .outputMode = kSPI_SlaveSelectAsGpio,
   .pinMode = kSPI_PinModeNormal,
-  .baudRate_Bps = 1000000UL
+  .baudRate_Bps = 500000UL
 };
-spi_master_handle_t SPI0_handle;
-uint8_t SPI0_txBuffer[SPI0_BUFFER_SIZE];
-uint8_t SPI0_rxBuffer[SPI0_BUFFER_SIZE];
 
 static void SPI0_init(void) {
   /* Initialization function */
   SPI_MasterInit(SPI0_PERIPHERAL, &SPI0_config, SPI0_CLK_FREQ);
-  SPI_MasterTransferCreateHandle(SPI0_PERIPHERAL, &SPI0_handle, NULL, NULL);
 }
 
 /***********************************************************************************************************************

@@ -31,9 +31,9 @@ extern "C" {
 #define ADC0_IRQN ADC0_IRQn
 /* ADC0 interrupt handler identifier. */
 #define ADC0_IRQHANDLER ADC0_IRQHandler
-/* Channel 0 (SE.23) conversion control group. */
+/* Channel 0 (SE.15) conversion control group. */
 #define ADC0_CH0_CONTROL_GROUP 0
-/* Channel 1 (SE.15) conversion control group. */
+/* Channel 1 (SE.23) conversion control group. */
 #define ADC0_CH1_CONTROL_GROUP 1
 /* Definition of peripheral ID */
 #define LPUART1_PERIPHERAL LPUART1
@@ -50,10 +50,6 @@ extern "C" {
 #define SPI0_CLOCK_SOURCE SPI0_CLK_SRC
 /* Definition of the clock source frequency */
 #define SPI0_CLK_FREQ CLOCK_GetFreq(SPI0_CLOCK_SOURCE)
-/* SPI0 interrupt vector ID (number). */
-#define SPI0_IRQN SPI0_IRQn
-/* Transfer buffer size. */
-#define SPI0_BUFFER_SIZE 260
 /* Alias for VREF peripheral */
 #define VREF_PERIPHERAL VREF
 /* Alias for VREF initial trim value */
@@ -76,9 +72,6 @@ extern const adc16_channel_mux_mode_t ADC0_muxMode;
 extern const adc16_hardware_average_mode_t ADC0_hardwareAverageMode;
 extern const lpuart_config_t LPUART1_config;
 extern const spi_master_config_t SPI0_config;
-extern spi_master_handle_t SPI0_handle;
-extern uint8_t SPI0_txBuffer[SPI0_BUFFER_SIZE];
-extern uint8_t SPI0_rxBuffer[SPI0_BUFFER_SIZE];
 extern const vref_config_t VREF_config;
 extern const tpm_config_t TPM0_config;
 

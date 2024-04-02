@@ -20,7 +20,7 @@
 trackerState state = STARTUP;
 uint8_t repeater_enabled = 0;
 uint8_t channel = 0;
-uint8_t txPower = TRACKER_TXPOWER_LOW;
+uint8_t txPower = 0;	//TRACKER_TXPOWER_LOW;
 uint32_t freq_list [4] = {TRACKER_FREQUENCY_0, TRACKER_FREQUENCY_1, TRACKER_FREQUENCY_2, TRACKER_FREQUENCY_3};
 
 void Tracker_setup(uint8_t params) {
@@ -37,11 +37,11 @@ int main(void) {
 	HW_trackerHwInit();
 	Tracker_setup(HW_getSW());
 	RADIO_init();
-	RADIO_modeLORA(freq_list[channel], txPower);
+	RADIO_modeLORA(freq_list[0], txPower); //<<<<---- odblokować zmianę przełącznikami!!!
 	GPS_init();
 
 	state = WAIT_FOR_FIX;
-	GPS_startup();
+	//GPS_startup();
 
 	state = OPERATION;
     while(1) {

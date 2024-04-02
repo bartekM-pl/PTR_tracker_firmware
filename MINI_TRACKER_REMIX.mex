@@ -203,11 +203,6 @@
                         <pin_feature name="drive_strength" value="high"/>
                      </pin_features>
                   </pin>
-                  <pin peripheral="SPI0" signal="PCS0" pin_num="25" pin_signal="PTC4/LLWU_P8/SPI0_SS/LPUART1_TX/TPM0_CH3/I2S0_MCLK">
-                     <pin_features>
-                        <pin_feature name="direction" value="INPUT"/>
-                     </pin_features>
-                  </pin>
                   <pin peripheral="SPI0" signal="SCK" pin_num="26" pin_signal="PTC5/LLWU_P9/SPI0_SCK/LPTMR0_ALT2/I2S0_RXD0/CMP0_OUT"/>
                   <pin peripheral="SPI0" signal="MOSI" pin_num="27" pin_signal="CMP0_IN0/PTC6/LLWU_P10/SPI0_MOSI/EXTRG_IN/I2S0_RX_BCLK/SPI0_MISO/I2S0_MCLK"/>
                   <pin peripheral="SPI0" signal="MISO" pin_num="28" pin_signal="CMP0_IN1/PTC7/SPI0_MISO/USB_SOF_OUT/I2S0_RX_FS/SPI0_MOSI"/>
@@ -219,6 +214,12 @@
                   <pin peripheral="GPIOD" signal="GPIO, 5" pin_num="30" pin_signal="ADC0_SE6b/PTD5/SPI1_SCK/UART2_TX/TPM0_CH5/FXIO0_D5">
                      <pin_features>
                         <pin_feature name="direction" value="INPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="GPIOC" signal="GPIO, 4" pin_num="25" pin_signal="PTC4/LLWU_P8/SPI0_SS/LPUART1_TX/TPM0_CH3/I2S0_MCLK">
+                     <pin_features>
+                        <pin_feature name="direction" value="OUTPUT"/>
+                        <pin_feature name="gpio_init_state" value="true"/>
                      </pin_features>
                   </pin>
                </pins>
@@ -355,12 +356,12 @@
                <description></description>
                <options/>
                <dependencies>
-                  <dependency resourceType="PeripheralUnifiedSignal" resourceId="ADC0.adc_se.23" description="Signal SE, channel 23 is not routed." problem_level="1" source="Peripherals:BOARD_InitPeripherals">
+                  <dependency resourceType="PeripheralUnifiedSignal" resourceId="ADC0.adc_se.15" description="Signal SE, channel 15 is not routed." problem_level="1" source="Peripherals:BOARD_InitPeripherals">
                      <feature name="routed" evaluation="">
                         <data type="Boolean">true</data>
                      </feature>
                   </dependency>
-                  <dependency resourceType="PeripheralUnifiedSignal" resourceId="ADC0.adc_se.15" description="Signal SE, channel 15 is not routed." problem_level="1" source="Peripherals:BOARD_InitPeripherals">
+                  <dependency resourceType="PeripheralUnifiedSignal" resourceId="ADC0.adc_se.23" description="Signal SE, channel 23 is not routed." problem_level="1" source="Peripherals:BOARD_InitPeripherals">
                      <feature name="routed" evaluation="">
                         <data type="Boolean">true</data>
                      </feature>
@@ -416,7 +417,6 @@
                      <config_set name="nvic">
                         <array name="interrupt_table">
                            <struct name="0"/>
-                           <struct name="1"/>
                         </array>
                         <array name="interrupts"/>
                      </config_set>
@@ -428,7 +428,7 @@
                            <setting name="clockSource" value="kADC16_ClockSourceAsynchronousClock"/>
                            <setting name="enableAsynchronousClock" value="true"/>
                            <setting name="clockDivider" value="kADC16_ClockDivider8"/>
-                           <setting name="resolution" value="kADC16_ResolutionSE12Bit"/>
+                           <setting name="resolution" value="kADC16_ResolutionSE16Bit"/>
                            <setting name="longSampleMode" value="kADC16_LongSampleCycle24"/>
                            <setting name="enableHighSpeed" value="false"/>
                            <setting name="enableLowPower" value="false"/>
@@ -454,7 +454,7 @@
                            <struct name="0">
                               <setting name="channelName" value=""/>
                               <setting name="enableDifferentialConversion" value="false"/>
-                              <setting name="channelNumber" value="SE.23"/>
+                              <setting name="channelNumber" value="SE.15"/>
                               <setting name="enableInterruptOnConversionCompleted" value="false"/>
                               <setting name="channelGroup" value="0"/>
                               <setting name="initializeChannel" value="true"/>
@@ -462,7 +462,7 @@
                            <struct name="1">
                               <setting name="channelName" value=""/>
                               <setting name="enableDifferentialConversion" value="false"/>
-                              <setting name="channelNumber" value="SE.15"/>
+                              <setting name="channelNumber" value="SE.23"/>
                               <setting name="enableInterruptOnConversionCompleted" value="false"/>
                               <setting name="channelGroup" value="1"/>
                               <setting name="initializeChannel" value="true"/>
@@ -505,20 +505,7 @@
                         </struct>
                      </config_set>
                   </instance>
-                  <instance name="SPI0" uuid="653a95ff-728e-4e64-a806-adfd89496bc2" type="spi" type_id="spi_672b694426b0a10a1d774659ee8f8435" mode="SPI_Transfer" peripheral="SPI0" enabled="true" comment="" custom_name_enabled="false" editing_lock="false">
-                     <config_set name="transferCfg">
-                        <struct name="transfer">
-                           <setting name="init_transfer" value="true"/>
-                           <struct name="transfer_cfg">
-                              <setting name="txDataBufferEnable" value="true"/>
-                              <setting name="rxDataBufferEnable" value="true"/>
-                              <setting name="dataSize" value="260"/>
-                           </struct>
-                           <setting name="init_callback" value="false"/>
-                           <setting name="callback_fcn" value=""/>
-                           <setting name="user_data" value=""/>
-                        </struct>
-                     </config_set>
+                  <instance name="SPI0" uuid="653a95ff-728e-4e64-a806-adfd89496bc2" type="spi" type_id="spi_672b694426b0a10a1d774659ee8f8435" mode="SPI_Polling" peripheral="SPI0" enabled="true" comment="" custom_name_enabled="false" editing_lock="false">
                      <config_set name="fsl_spi">
                         <setting name="spi_mode" value="kSPI_Master"/>
                         <setting name="clockSource" value="BusInterfaceClock"/>
@@ -530,14 +517,9 @@
                            <setting name="phase" value="kSPI_ClockPhaseFirstEdge"/>
                            <setting name="direction" value="kSPI_MsbFirst"/>
                            <setting name="dataMode" value="kSPI_8BitMode"/>
-                           <setting name="outputMode" value="kSPI_SlaveSelectAutomaticOutput"/>
+                           <setting name="outputMode" value="kSPI_SlaveSelectAsGpio"/>
                            <setting name="pinMode" value="kSPI_PinModeNormal"/>
-                           <setting name="baudRate_Bps" value="1000000"/>
-                        </struct>
-                        <struct name="interrupt_rx_tx">
-                           <setting name="IRQn" value="SPI0_IRQn"/>
-                           <setting name="enable_priority" value="false"/>
-                           <setting name="priority" value="0"/>
+                           <setting name="baudRate_Bps" value="500000"/>
                         </struct>
                      </config_set>
                   </instance>

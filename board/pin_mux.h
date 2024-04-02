@@ -92,15 +92,6 @@ void BOARD_InitBootPins(void);
 #define BOARD_INITPINS_LED_PIN_MASK (1U << 3U)      /*!<@brief PORT pin mask */
                                                     /* @} */
 
-/*! @name PORTC4 (number 25), LORA_CS
-  @{ */
-
-/* Symbols to be used with PORT driver */
-#define BOARD_INITPINS_LORA_CS_PORT PORTC               /*!<@brief PORT peripheral base pointer */
-#define BOARD_INITPINS_LORA_CS_PIN 4U                   /*!<@brief PORT pin number */
-#define BOARD_INITPINS_LORA_CS_PIN_MASK (1U << 4U)      /*!<@brief PORT pin mask */
-                                                        /* @} */
-
 /*! @name PORTC5 (number 26), LORA_SCK
   @{ */
 
@@ -155,6 +146,20 @@ void BOARD_InitBootPins(void);
 #define BOARD_INITPINS_LORA_DIO1_PIN 5U                   /*!<@brief PORT pin number */
 #define BOARD_INITPINS_LORA_DIO1_PIN_MASK (1U << 5U)      /*!<@brief PORT pin mask */
                                                           /* @} */
+
+/*! @name PORTC4 (number 25), LORA_CS
+  @{ */
+
+/* Symbols to be used with GPIO driver */
+#define BOARD_INITPINS_LORA_CS_FGPIO FGPIOC             /*!<@brief FGPIO peripheral base pointer */
+#define BOARD_INITPINS_LORA_CS_GPIO GPIOC               /*!<@brief GPIO peripheral base pointer */
+#define BOARD_INITPINS_LORA_CS_GPIO_PIN_MASK (1U << 4U) /*!<@brief GPIO pin mask */
+
+/* Symbols to be used with PORT driver */
+#define BOARD_INITPINS_LORA_CS_PORT PORTC               /*!<@brief PORT peripheral base pointer */
+#define BOARD_INITPINS_LORA_CS_PIN 4U                   /*!<@brief PORT pin number */
+#define BOARD_INITPINS_LORA_CS_PIN_MASK (1U << 4U)      /*!<@brief PORT pin mask */
+                                                        /* @} */
 
 /*!
  * @brief Configures pin routing and optionally pin electrical features.

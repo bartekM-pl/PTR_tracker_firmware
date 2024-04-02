@@ -91,12 +91,12 @@ BOARD_InitPins:
   - {pin_num: '23', peripheral: GPIOC, signal: 'GPIO, 2', pin_signal: ADC0_SE11/PTC2/I2C1_SDA/TPM0_CH1/I2S0_TX_FS, direction: INPUT}
   - {pin_num: '24', peripheral: GPIOC, signal: 'GPIO, 3', pin_signal: PTC3/LLWU_P7/SPI1_SCK/LPUART1_RX/TPM0_CH2/CLKOUT/I2S0_TX_BCLK, direction: OUTPUT, gpio_init_state: 'true',
     slew_rate: slow, drive_strength: high}
-  - {pin_num: '25', peripheral: SPI0, signal: PCS0, pin_signal: PTC4/LLWU_P8/SPI0_SS/LPUART1_TX/TPM0_CH3/I2S0_MCLK, direction: INPUT}
   - {pin_num: '26', peripheral: SPI0, signal: SCK, pin_signal: PTC5/LLWU_P9/SPI0_SCK/LPTMR0_ALT2/I2S0_RXD0/CMP0_OUT}
   - {pin_num: '27', peripheral: SPI0, signal: MOSI, pin_signal: CMP0_IN0/PTC6/LLWU_P10/SPI0_MOSI/EXTRG_IN/I2S0_RX_BCLK/SPI0_MISO/I2S0_MCLK}
   - {pin_num: '28', peripheral: SPI0, signal: MISO, pin_signal: CMP0_IN1/PTC7/SPI0_MISO/USB_SOF_OUT/I2S0_RX_FS/SPI0_MOSI}
   - {pin_num: '29', peripheral: GPIOD, signal: 'GPIO, 4', pin_signal: PTD4/LLWU_P14/SPI1_SS/UART2_RX/TPM0_CH4/FXIO0_D4, direction: INPUT}
   - {pin_num: '30', peripheral: GPIOD, signal: 'GPIO, 5', pin_signal: ADC0_SE6b/PTD5/SPI1_SCK/UART2_TX/TPM0_CH5/FXIO0_D5, direction: INPUT}
+  - {pin_num: '25', peripheral: GPIOC, signal: 'GPIO, 4', pin_signal: PTC4/LLWU_P8/SPI0_SS/LPUART1_TX/TPM0_CH3/I2S0_MCLK, direction: OUTPUT, gpio_init_state: 'true'}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -133,6 +133,13 @@ void BOARD_InitPins(void)
     };
     /* Initialize GPIO functionality on pin PTC3 (pin 24)  */
     GPIO_PinInit(BOARD_INITPINS_LED_GPIO, BOARD_INITPINS_LED_PIN, &LED_config);
+
+    gpio_pin_config_t LORA_CS_config = {
+        .pinDirection = kGPIO_DigitalOutput,
+        .outputLogic = 1U
+    };
+    /* Initialize GPIO functionality on pin PTC4 (pin 25)  */
+    GPIO_PinInit(BOARD_INITPINS_LORA_CS_GPIO, BOARD_INITPINS_LORA_CS_PIN, &LORA_CS_config);
 
     gpio_pin_config_t LORA_BUSY_config = {
         .pinDirection = kGPIO_DigitalInput,
@@ -181,8 +188,8 @@ void BOARD_InitPins(void)
                       * is configured as a digital output. */
                      | PORT_PCR_DSE(kPORT_HighDriveStrength));
 
-    /* PORTC4 (pin 25) is configured as SPI0_SS */
-    PORT_SetPinMux(BOARD_INITPINS_LORA_CS_PORT, BOARD_INITPINS_LORA_CS_PIN, kPORT_MuxAlt2);
+    /* PORTC4 (pin 25) is configured as PTC4 */
+    PORT_SetPinMux(BOARD_INITPINS_LORA_CS_PORT, BOARD_INITPINS_LORA_CS_PIN, kPORT_MuxAsGpio);
 
     /* PORTC5 (pin 26) is configured as SPI0_SCK */
     PORT_SetPinMux(BOARD_INITPINS_LORA_SCK_PORT, BOARD_INITPINS_LORA_SCK_PIN, kPORT_MuxAlt2);
