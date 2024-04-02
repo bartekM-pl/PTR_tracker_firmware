@@ -1,0 +1,7 @@
+ExitOnError 1
+r
+h
+loadfile "C:\Users\Bartek\Documents\GitHub\PTR\mini_tracket_firmware\workspace\MINI_TRACKER_REMIX\Debug\MINI_TRACKER_REMIX.hex" 0x0 
+qc
+
+qc
