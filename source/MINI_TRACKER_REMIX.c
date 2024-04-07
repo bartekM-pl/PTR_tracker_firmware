@@ -41,7 +41,7 @@ int main(void) {
 	GPS_init();
 
 	state = WAIT_FOR_FIX;
-	//GPS_startup();
+	GPS_startup();
 
 	state = OPERATION;
     while(1) {
