@@ -20,8 +20,11 @@
 trackerState state = STARTUP;
 uint8_t repeater_enabled = 0;
 uint8_t channel = 0;
-uint8_t txPower = 0;	//TRACKER_TXPOWER_LOW;
+uint8_t txPower = TRACKER_TXPOWER_LOW;
 uint32_t freq_list [4] = {TRACKER_FREQUENCY_0, TRACKER_FREQUENCY_1, TRACKER_FREQUENCY_2, TRACKER_FREQUENCY_3};
+int32_t lat_buf = 0;
+int32_t lon_buf = 0;
+int32_t alt_buf = 0;
 
 void Tracker_setup(uint8_t params) {
 	channel = params & 0b11;
@@ -45,7 +48,13 @@ int main(void) {
 
 	state = OPERATION;
     while(1) {
-    	KPLORA_pack_data_standard(state, HW_getTimeMs(), HW_getVbat(), GPS_getLat(), GPS_getLon(), GPS_getAlt(), GPS_getFix(), GPS_getSats());
+    	if(GPS_getFix() > 0){
+    		lat_buf = GPS_getLat();
+			lon_buf = GPS_getLon();
+			alt_buf = GPS_getAlt();
+    	}
+
+    	KPLORA_pack_data_standard(state, HW_getTimeMs(), HW_getVbat(), lat_buf, lon_buf, alt_buf, GPS_getFix(), GPS_getSats());
 		KPLORA_listenBeforeTalk();
 		KPLORA_send_data_lora();
 
