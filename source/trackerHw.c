@@ -37,6 +37,7 @@ void HW_trackerHwInit(void) {
 	BOARD_InitBootClocks();
 	BOARD_InitBootPeripherals();
 	SysTick_Config(CLOCK_GetFreq(kCLOCK_CoreSysClk) / 1000U);
+	HW_DelayMs(10); // ADC startup
 }
 
 void HW_writeLED(bool _value) {
@@ -75,35 +76,39 @@ uint32_t HW_readADC(uint8_t _ch) {
 
 uint8_t HW_getVbat(){
 	uint32_t raw = HW_readADC(0);
-	return 10.0f * 11.0f * (float)raw * 3.3f / 65536.0f;	//11x bo dzielnik 1:11,   3.3f bo 3.3V Vref,    65536.0f bo 16bit
+	float tmp = 10.0f * 10.7f * (float)raw * 3.3f / 65536.0f;	//11x bo dzielnik 1:11,   3.3f bo 3.3V Vref,    65536.0f bo 16bit
+	return (uint8_t)tmp;
 }
 
 uint8_t HW_getSW(){
 	uint32_t raw = 0;
 
-	for(int i=0;i<10;i++) {
-		raw += HW_readADC(1);
+	for(int i=0;i<32;i++) {
+		raw += HW_readADC(0);
 	}
-	uint32_t adcValue = raw / 10;
+	uint32_t adcValue = raw / 32;
 
-	if(adcValue < 2000)
-			return 0;
-		else if(adcValue < 2100)
-			return 1;
-		else if(adcValue < 3450)
-			return 2;
-		else if(adcValue < 3550)
-			return 3;
-		else if(adcValue < 3740)
-			return 4;
-		else if(adcValue < 3800)
-			return 5;
-		else if(adcValue < 3850)
-			return 6;
-		else if(adcValue < 3870)
-			return 7;
-		else
-			return 0;
+	// Change ADC channel from SW to VBAT
+	ADC16_SetChannelConfig(ADC0_PERIPHERAL, ADC0_CH0_CONTROL_GROUP, &ADC0_channelsConfig[1]);
+
+	if(adcValue < 52000)
+		return 0;
+	else if(adcValue < 56943)
+		return 1;
+	else if(adcValue < 60591)
+		return 2;
+	else if(adcValue < 62860)
+		return 3;
+	else if(adcValue < 64310)
+		return 4;
+	else if(adcValue < 64425)
+		return 5;
+	else if(adcValue < 64522)
+		return 6;
+	else if(adcValue < 65000)
+		return 7;
+	else
+		return 0;
 }
 
 uint8_t HW_readDIO1() {

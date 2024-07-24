@@ -48,87 +48,59 @@
                <properties/>
                <signals>
                   <external_user_signal id="1">
-                     <pin_connections>
-                        <pin>28</pin>
-                     </pin_connections>
+                     <pin_connections/>
                      <property_values/>
                   </external_user_signal>
                   <external_user_signal id="2">
-                     <pin_connections>
-                        <pin>9</pin>
-                     </pin_connections>
+                     <pin_connections/>
                      <property_values/>
                   </external_user_signal>
                   <external_user_signal id="3">
-                     <pin_connections>
-                        <pin>17</pin>
-                     </pin_connections>
+                     <pin_connections/>
                      <property_values/>
                   </external_user_signal>
                   <external_user_signal id="4">
-                     <pin_connections>
-                        <pin>18</pin>
-                     </pin_connections>
+                     <pin_connections/>
                      <property_values/>
                   </external_user_signal>
                   <external_user_signal id="5">
-                     <pin_connections>
-                        <pin>20</pin>
-                     </pin_connections>
+                     <pin_connections/>
                      <property_values/>
                   </external_user_signal>
                   <external_user_signal id="6">
-                     <pin_connections>
-                        <pin>21</pin>
-                     </pin_connections>
+                     <pin_connections/>
                      <property_values/>
                   </external_user_signal>
                   <external_user_signal id="7">
-                     <pin_connections>
-                        <pin>22</pin>
-                     </pin_connections>
+                     <pin_connections/>
                      <property_values/>
                   </external_user_signal>
                   <external_user_signal id="8">
-                     <pin_connections>
-                        <pin>23</pin>
-                     </pin_connections>
+                     <pin_connections/>
                      <property_values/>
                   </external_user_signal>
                   <external_user_signal id="9">
-                     <pin_connections>
-                        <pin>24</pin>
-                     </pin_connections>
+                     <pin_connections/>
                      <property_values/>
                   </external_user_signal>
                   <external_user_signal id="10">
-                     <pin_connections>
-                        <pin>25</pin>
-                     </pin_connections>
+                     <pin_connections/>
                      <property_values/>
                   </external_user_signal>
                   <external_user_signal id="11">
-                     <pin_connections>
-                        <pin>26</pin>
-                     </pin_connections>
+                     <pin_connections/>
                      <property_values/>
                   </external_user_signal>
                   <external_user_signal id="12">
-                     <pin_connections>
-                        <pin>27</pin>
-                     </pin_connections>
+                     <pin_connections/>
                      <property_values/>
                   </external_user_signal>
                   <external_user_signal id="13">
-                     <pin_connections>
-                        <pin>29</pin>
-                     </pin_connections>
+                     <pin_connections/>
                      <property_values/>
                   </external_user_signal>
                   <external_user_signal id="14">
-                     <pin_connections>
-                        <pin>30</pin>
-                     </pin_connections>
+                     <pin_connections/>
                      <property_values/>
                   </external_user_signal>
                </signals>
@@ -190,11 +162,6 @@
                   <pin peripheral="I2C0" signal="SCL" pin_num="20" pin_signal="ADC0_SE8/PTB0/LLWU_P5/I2C0_SCL/TPM1_CH0"/>
                   <pin peripheral="I2C0" signal="SDA" pin_num="21" pin_signal="ADC0_SE9/PTB1/I2C0_SDA/TPM1_CH1"/>
                   <pin peripheral="ADC0" signal="SE, 15" pin_num="22" pin_signal="ADC0_SE15/PTC1/LLWU_P6/RTC_CLKIN/I2C1_SCL/TPM0_CH0/I2S0_TXD0"/>
-                  <pin peripheral="GPIOC" signal="GPIO, 2" pin_num="23" pin_signal="ADC0_SE11/PTC2/I2C1_SDA/TPM0_CH1/I2S0_TX_FS">
-                     <pin_features>
-                        <pin_feature name="direction" value="INPUT"/>
-                     </pin_features>
-                  </pin>
                   <pin peripheral="GPIOC" signal="GPIO, 3" pin_num="24" pin_signal="PTC3/LLWU_P7/SPI1_SCK/LPUART1_RX/TPM0_CH2/CLKOUT/I2S0_TX_BCLK">
                      <pin_features>
                         <pin_feature name="direction" value="OUTPUT"/>
@@ -220,6 +187,11 @@
                      <pin_features>
                         <pin_feature name="direction" value="OUTPUT"/>
                         <pin_feature name="gpio_init_state" value="true"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="GPIOC" signal="GPIO, 2" pin_num="23" pin_signal="ADC0_SE11/PTC2/I2C1_SDA/TPM0_CH1/I2S0_TX_FS">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
                      </pin_features>
                   </pin>
                </pins>
@@ -356,12 +328,12 @@
                <description></description>
                <options/>
                <dependencies>
-                  <dependency resourceType="PeripheralUnifiedSignal" resourceId="ADC0.adc_se.15" description="Signal SE, channel 15 is not routed." problem_level="1" source="Peripherals:BOARD_InitPeripherals">
+                  <dependency resourceType="PeripheralUnifiedSignal" resourceId="ADC0.adc_se.23" description="Signal SE, channel 23 is not routed." problem_level="1" source="Peripherals:BOARD_InitPeripherals">
                      <feature name="routed" evaluation="">
                         <data type="Boolean">true</data>
                      </feature>
                   </dependency>
-                  <dependency resourceType="PeripheralUnifiedSignal" resourceId="ADC0.adc_se.23" description="Signal SE, channel 23 is not routed." problem_level="1" source="Peripherals:BOARD_InitPeripherals">
+                  <dependency resourceType="PeripheralUnifiedSignal" resourceId="ADC0.adc_se.15" description="Signal SE, channel 15 is not routed." problem_level="1" source="Peripherals:BOARD_InitPeripherals">
                      <feature name="routed" evaluation="">
                         <data type="Boolean">true</data>
                      </feature>
@@ -454,7 +426,7 @@
                            <struct name="0">
                               <setting name="channelName" value=""/>
                               <setting name="enableDifferentialConversion" value="false"/>
-                              <setting name="channelNumber" value="SE.15"/>
+                              <setting name="channelNumber" value="SE.23"/>
                               <setting name="enableInterruptOnConversionCompleted" value="false"/>
                               <setting name="channelGroup" value="0"/>
                               <setting name="initializeChannel" value="true"/>
@@ -462,7 +434,7 @@
                            <struct name="1">
                               <setting name="channelName" value=""/>
                               <setting name="enableDifferentialConversion" value="false"/>
-                              <setting name="channelNumber" value="SE.23"/>
+                              <setting name="channelNumber" value="SE.15"/>
                               <setting name="enableInterruptOnConversionCompleted" value="false"/>
                               <setting name="channelGroup" value="1"/>
                               <setting name="initializeChannel" value="true"/>

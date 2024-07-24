@@ -37,14 +37,16 @@ void Tracker_setup(uint8_t params) {
 
 int main(void) {
     state = STARTUP;
-	HW_trackerHwInit();
-	Tracker_setup(HW_getSW());
+    HW_trackerHwInit();
+
+    Tracker_setup(HW_getSW());
+
 	RADIO_init();
-	RADIO_modeLORA(freq_list[0], txPower); //<<<<---- odblokować zmianę przełącznikami!!!
+	RADIO_modeLORA(freq_list[channel], txPower);
 	GPS_init();
 
 	state = WAIT_FOR_FIX;
-	GPS_startup();
+	//GPS_startup();
 
 	state = OPERATION;
     while(1) {

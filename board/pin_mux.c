@@ -15,34 +15,20 @@ processor_version: 13.0.1
 external_user_signals:
   routingDetailsColumns: ['#', Peripheral, Signal, Arrow]
   signals:
-  - id: '1'
-    pin_connections: ['28']
-  - id: '2'
-    pin_connections: ['9']
-  - id: '3'
-    pin_connections: ['17']
-  - id: '4'
-    pin_connections: ['18']
-  - id: '5'
-    pin_connections: ['20']
-  - id: '6'
-    pin_connections: ['21']
-  - id: '7'
-    pin_connections: ['22']
-  - id: '8'
-    pin_connections: ['23']
-  - id: '9'
-    pin_connections: ['24']
-  - id: '10'
-    pin_connections: ['25']
-  - id: '11'
-    pin_connections: ['26']
-  - id: '12'
-    pin_connections: ['27']
-  - id: '13'
-    pin_connections: ['29']
-  - id: '14'
-    pin_connections: ['30']
+  - {id: '1'}
+  - {id: '2'}
+  - {id: '3'}
+  - {id: '4'}
+  - {id: '5'}
+  - {id: '6'}
+  - {id: '7'}
+  - {id: '8'}
+  - {id: '9'}
+  - {id: '10'}
+  - {id: '11'}
+  - {id: '12'}
+  - {id: '13'}
+  - {id: '14'}
 pin_labels:
 - {pin_num: '9', pin_signal: DAC0_OUT/ADC0_SE23/CMP0_IN4/PTE30/TPM0_CH3/TPM_CLKIN1/LPUART1_TX/LPTMR0_ALT1, label: SEL_SW, identifier: SEL_SW}
 - {pin_num: '17', pin_signal: EXTAL0/PTA18/LPUART1_RX/TPM_CLKIN0, label: GPS_IN, identifier: GPS_IN}
@@ -88,7 +74,6 @@ BOARD_InitPins:
   - {pin_num: '20', peripheral: I2C0, signal: SCL, pin_signal: ADC0_SE8/PTB0/LLWU_P5/I2C0_SCL/TPM1_CH0}
   - {pin_num: '21', peripheral: I2C0, signal: SDA, pin_signal: ADC0_SE9/PTB1/I2C0_SDA/TPM1_CH1}
   - {pin_num: '22', peripheral: ADC0, signal: 'SE, 15', pin_signal: ADC0_SE15/PTC1/LLWU_P6/RTC_CLKIN/I2C1_SCL/TPM0_CH0/I2S0_TXD0}
-  - {pin_num: '23', peripheral: GPIOC, signal: 'GPIO, 2', pin_signal: ADC0_SE11/PTC2/I2C1_SDA/TPM0_CH1/I2S0_TX_FS, direction: INPUT}
   - {pin_num: '24', peripheral: GPIOC, signal: 'GPIO, 3', pin_signal: PTC3/LLWU_P7/SPI1_SCK/LPUART1_RX/TPM0_CH2/CLKOUT/I2S0_TX_BCLK, direction: OUTPUT, gpio_init_state: 'true',
     slew_rate: slow, drive_strength: high}
   - {pin_num: '26', peripheral: SPI0, signal: SCK, pin_signal: PTC5/LLWU_P9/SPI0_SCK/LPTMR0_ALT2/I2S0_RXD0/CMP0_OUT}
@@ -97,6 +82,7 @@ BOARD_InitPins:
   - {pin_num: '29', peripheral: GPIOD, signal: 'GPIO, 4', pin_signal: PTD4/LLWU_P14/SPI1_SS/UART2_RX/TPM0_CH4/FXIO0_D4, direction: INPUT}
   - {pin_num: '30', peripheral: GPIOD, signal: 'GPIO, 5', pin_signal: ADC0_SE6b/PTD5/SPI1_SCK/UART2_TX/TPM0_CH5/FXIO0_D5, direction: INPUT}
   - {pin_num: '25', peripheral: GPIOC, signal: 'GPIO, 4', pin_signal: PTC4/LLWU_P8/SPI0_SS/LPUART1_TX/TPM0_CH3/I2S0_MCLK, direction: OUTPUT, gpio_init_state: 'true'}
+  - {pin_num: '23', peripheral: GPIOC, signal: 'GPIO, 2', pin_signal: ADC0_SE11/PTC2/I2C1_SDA/TPM0_CH1/I2S0_TX_FS, direction: INPUT}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */

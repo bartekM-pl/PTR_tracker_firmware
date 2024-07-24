@@ -24,7 +24,7 @@ typedef enum{
 typedef union{
 	uint16_t ID;
 	struct __attribute__((__packed__)){
-		msg_type_e msg_type;		// Message type
+		uint8_t msg_type;			// Message type
 		uint8_t msg_ver		: 2;	// Message version (should be 0, for future use)
 		uint8_t retransmit	: 1;	// Retransmission flag (1=ON, 0=OFF)
 		uint8_t encoded		: 1;	// Data encryption (1=ON, 0=OFF)
