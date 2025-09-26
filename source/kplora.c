@@ -9,7 +9,8 @@ KPLORA_ProtocolTier KPLORA_protocolTier;
 int KPLORA_LBTCounter;
 uint16_t KPLORA_packetCounter = 0;
 
-void KPLORA_pack_data_standard(int _state, uint32_t time_ms, uint8_t _vbat, uint32_t _lat, uint32_t _lon, uint32_t _alt, uint8_t _fix, uint8_t _sats) {
+void KPLORA_pack_data_standard(int _state, uint32_t time_ms, uint8_t _vbat, uint32_t _lat, uint32_t _lon,
+								uint32_t _alt, uint32_t max_alt, uint8_t _fix, uint8_t _sats) {
 
 	kppacket_header_t header = {
 		.packet_id.msg_type = PACKET_TRACKER,
@@ -30,6 +31,7 @@ void KPLORA_pack_data_standard(int _state, uint32_t time_ms, uint8_t _vbat, uint
 		.lat = _lat,
 		.lon = _lon,
 		.alti_gps = _alt,
+		.max_alti = max_alt,
 		.sats_fix = ((_fix & 3) << 6) | (_sats & 0x3F)
 	};
 

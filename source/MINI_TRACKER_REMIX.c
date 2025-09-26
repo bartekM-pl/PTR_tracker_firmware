@@ -25,6 +25,7 @@ uint32_t freq_list [4] = {TRACKER_FREQUENCY_0, TRACKER_FREQUENCY_1, TRACKER_FREQ
 int32_t lat_buf = 0;
 int32_t lon_buf = 0;
 int32_t alt_buf = 0;
+int32_t max_alt_buf = 0;
 
 void Tracker_setup(uint8_t params) {
 	channel = params & 0b11;
@@ -46,17 +47,19 @@ int main(void) {
 	GPS_init();
 
 	state = WAIT_FOR_FIX;
-	//GPS_startup();
+	GPS_startup();
 
 	state = OPERATION;
     while(1) {
     	if(GPS_getFix() > 0){
     		lat_buf = GPS_getLat();
 			lon_buf = GPS_getLon();
-			alt_buf = GPS_getAlt();
+			alt_buf = 1000 + GPS_getAlt();
+
+			if(max_alt_buf < alt_buf) max_alt_buf = alt_buf;
     	}
 
-    	KPLORA_pack_data_standard(state, HW_getTimeMs(), HW_getVbat(), lat_buf, lon_buf, alt_buf, GPS_getFix(), GPS_getSats());
+    	KPLORA_pack_data_standard(state, HW_getTimeMs(), HW_getVbat(), lat_buf, lon_buf, alt_buf, max_alt_buf, GPS_getFix(), GPS_getSats());
 		KPLORA_listenBeforeTalk();
 		KPLORA_send_data_lora();
 
